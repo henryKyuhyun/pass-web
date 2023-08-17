@@ -10,11 +10,11 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PassModelMapper {
-
     PassModelMapper INSTANCE = Mappers.getMapper(PassModelMapper.class);
 
     @Mapping(target = "packageName", source = "packageEntity.packageName")
     Pass map(PassEntity passEntity);
 
     List<Pass> map(List<PassEntity> passEntities);
+
 }

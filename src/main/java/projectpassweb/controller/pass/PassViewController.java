@@ -28,7 +28,7 @@ public class PassViewController {
     public ModelAndView getPasses(@RequestParam("userId") String userId, ModelAndView modelAndView){
         //    passes, user
         final List<Pass> passes = passService.getPasses(userId);
-        final User user = userService.getUser(userId)
+        final User user = userService.getUser(userId);
 
         modelAndView.addObject("passes", passes);
         modelAndView.addObject("user", user);

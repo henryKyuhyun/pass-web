@@ -30,6 +30,7 @@ public class PassEntity extends BaseEntity {
     private LocalDateTime endedAt;
     private LocalDateTime expiredAt;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "packageSeq", insertable = false, updatable = false)
     private PackageEntity packageEntity;

@@ -2,14 +2,15 @@ package projectpassweb.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import projectpassweb.service.packaze.PackageService;
 import projectpassweb.service.pass.BulkPassService;
+import projectpassweb.service.statistics.StatisticsService;
 import projectpassweb.service.user.UserGroupMappingService;
+import projectpassweb.util.LocalDateTimeUtils;
+
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -18,11 +19,23 @@ public class AdminViewController {
     private final BulkPassService bulkPassService;
     private final PackageService packageService;
     private final UserGroupMappingService userGroupMappingService;
+    private final StatisticsService statisticsService;
 
-    public AdminViewController(BulkPassService bulkPassService, PackageService packageService, UserGroupMappingService userGroupMappingService) {
+    public AdminViewController(BulkPassService bulkPassService, PackageService packageService, UserGroupMappingService userGroupMappingService, StatisticsService statisticsService) {
         this.bulkPassService = bulkPassService;
         this.packageService = packageService;
         this.userGroupMappingService = userGroupMappingService;
+        this.statisticsService = statisticsService;
+    }
+
+    @GetMapping
+    public ModelAndView home(ModelAndView modelAndView, @RequestParam("to") String toString) {
+        LocalDateTime to = LocalDateTimeUtils.parseDate(toString);
+
+//        charData 를 조회, (라벨, 출석횟수, 취소횟수)
+        modelAndView.addObject("chartData", statisticsService.makeChartData(to));
+        modelAndView.setViewName("admin/index");
+        return modelAndView;
     }
 
     @GetMapping("/bulk-pass")

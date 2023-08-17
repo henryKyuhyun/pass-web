@@ -8,6 +8,6 @@ import java.util.List;
 public interface BulkPassRepository extends JpaRepository<BulkPassEntity, Integer> {
 
     @Query(value = "select b from BulkPassEntity b" +
-            "order by b.startedAt desc")
+            " order by b.startedAt desc")
     List<BulkPassEntity> findAllOrderByStartedAtDesc();
 }

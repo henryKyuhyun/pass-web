@@ -6,6 +6,7 @@ import projectpassweb.repository.packaze.PackageEntity;
 import projectpassweb.repository.packaze.PackageRepository;
 import projectpassweb.repository.pass.BulkPassEntity;
 import projectpassweb.repository.pass.BulkPassRepository;
+import projectpassweb.repository.pass.BulkPassStatus;
 
 import java.util.List;
 
